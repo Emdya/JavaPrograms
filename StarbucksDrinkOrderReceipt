@@ -1,0 +1,152 @@
+
+/**
+ * Purpose: Store the User input for a Starbucks drink, & print out a receipt 
+ * using the information provided. 
+ *
+ * Emdya Permuy-Llovio
+ * Date: July 10, 2023
+ */
+import java.util.Scanner;//Imports Scanner Methods
+public class StarbucksOrder
+{
+    public static void main(String[]args)
+    {
+        //All variables declared:
+        String fullName;
+        String date;
+        String nameOfDrink;
+        String allDrinks = " ";
+        String sizeOfDrink;
+        String allNamesOfDrinks;
+        String allSizesOfDrinks = " " ;
+        String drinks;
+        int numOfMoreDrinks;
+        int numOfDrinks = 0;
+        double priceOfDrink = 5.33;
+        String debitCardNum;
+        String debitCardNum01;
+        String debitCardNum02;
+        String debitCardNum03;
+        String pin;
+        String orderNumber;
+        
+        Scanner in = new Scanner (System.in); //Declaring & constructing the
+        /*
+         * object in from Scanner class.
+         */
+        
+        System.out.print("Please enter your first & last name, separated by spaces:");//Prompts the user to enter their first & last name.
+        fullName = in.next(); //Will store the input [token] into the firstName. Only accepts one word (no spaces).
+        fullName += in.nextLine(); //Will store the input into the tokens that were not collected fron the next(), & concatenates that with the first part of the full name (First name).
+        System.out.println();
+        System.out.println();
+        System.out.println();
+        
+        System.out.println("Enter the date in the format mm/dd/yy");
+        date = in.next(); //Will store the input into date that is a String object.
+        System.out.println();
+        System.out.println();
+        System.out.println();
+        //User input.
+        System.out.println("What type of drink would you like?");
+        nameOfDrink = in.next();
+        nameOfDrink += in.nextLine();
+        allDrinks += nameOfDrink; //List of the names of the drinks
+        System.out.println("What size? Demi(3 oz.), Short(8 oz.), Tall(12 oz.), Grande (16 oz.), Venti (20 oz.), Trenta (31 oz.)");
+        sizeOfDrink = in.next();
+        allSizesOfDrinks += sizeOfDrink; //List of the size of drinks
+        System.out.println("How many more drinks would you like?");
+        drinks = in.next();
+        numOfMoreDrinks = Integer.parseInt(drinks);
+        numOfDrinks ++; //To count the # of drinks ordered. 
+        
+        
+        
+        while (numOfMoreDrinks >= 1) //While if someone orders more than one drink.
+        {
+            System.out.println("What type of drink would you like?");
+            nameOfDrink = in.next();
+            nameOfDrink += in.nextLine();
+            allDrinks += "," + nameOfDrink;
+            System.out.println("What size? Demi(3 oz.), Short(8 oz.), Tall(12 oz.), Grande (16 oz.), Venti (20 oz.), Trenta (31 oz.)");
+            sizeOfDrink = in.next();
+            allSizesOfDrinks += "," + sizeOfDrink;
+            System.out.println("How many more drinks would you like?");
+            drinks = in.next();
+            numOfMoreDrinks = Integer.parseInt(drinks);
+            numOfDrinks ++;
+        }
+        priceOfDrink *= numOfDrinks;
+        System.out.println("Your total is:" + "$" + priceOfDrink); 
+        System.out.println("Enter your Debit Card Number:(############) no spaces or dashes");
+        debitCardNum = in.next();
+        debitCardNum01 = debitCardNum.substring(0,5); 
+        debitCardNum02 = debitCardNum.substring(5,8);
+        debitCardNum03 = debitCardNum.substring(8);
+        debitCardNum = debitCardNum01 + "-" + debitCardNum02 + "-" + debitCardNum03; //Will add dashes in-between parts of the Card #.
+        debitCardNum = debitCardNum.replace(debitCardNum01,"#####"); //Code for replacing the numbers with hashtages to hide the card #s.
+        debitCardNum = debitCardNum.replace(debitCardNum02,"###"); //Code for replacing the numbers with hashtages to hide the card #s.
+        System.out.println("Debit Card Number:" + debitCardNum);
+        
+        
+        //Code for Pin
+        System.out.println("Enter your pin:(####) ");
+        pin = in.next();
+        pin = pin.substring(0,4);
+        System.out.println();
+        
+        
+        orderNumber = fullName.substring(0,1) + date.substring(3,4) + debitCardNum02; //Will concatenate parts to form orderNumber
+        
+        
+        //Code for Receipt
+        System.out.println("*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*");
+        System.out.println("*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*");
+        System.out.println("*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*");
+        System.out.println("*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*");
+        System.out.println("Your e-Receipt:");
+        System.out.println();
+        System.out.println();
+        System.out.println(date);
+        System.out.println("Order Number:" + orderNumber);
+        System.out.println("Account" + debitCardNum);
+        System.out.println("Drink(s): " + allDrinks + "\t\t" + "Size of Drink(s): " + allSizesOfDrinks);
+        System.out.println();
+        System.out.println();
+        System.out.println("Number of items: " + numOfDrinks);
+        System.out.println("Price of Drinks: " + priceOfDrink);
+        System.out.println();
+        System.out.println();
+        System.out.print(priceOfDrink + " Will be debited to your account");
+        System.out.println();
+        System.out.println();
+        System.out.print("Thank you " + fullName + " for enjoying Starbucks!");
+        System.out.println();
+        System.out.println();
+        System.out.println();
+        System.out.println("*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*");
+        System.out.println("*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*");
+        System.out.println("*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*");
+        System.out.println("*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*");
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+    }
+}
